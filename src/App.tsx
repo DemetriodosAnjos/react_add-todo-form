@@ -21,9 +21,9 @@ export const App: React.FC = () => {
 
   const addTodo = (newTodo: { title: string; userId: number }) => {
     const maxId = Math.max(...todos.map(todo => todo.id), 0);
-    const foundUser = users.find(foundUser => foundUser.id === newTodo.userId);
+    const selectedUser = users.find(user => user.id === newTodo.userId);
 
-    if (!foundUser) {
+    if (!selectedUser) {
       return;
     }
 
@@ -32,7 +32,7 @@ export const App: React.FC = () => {
       title: newTodo.title,
       userId: newTodo.userId,
       completed: false,
-      user: foundUser,
+      user: selectedUser,
     };
 
     setTodos(currentTodos => [...currentTodos, todoToAdd]);
