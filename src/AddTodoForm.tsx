@@ -15,8 +15,8 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({
   const [titleError, setTitleError] = useState('');
   const [userError, setUserError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
     let hasError = false;
 
@@ -46,6 +46,24 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({
     setUserError('');
   };
 
+  const handleTitleChange = (
+    changeEvent: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTitle(changeEvent.target.value);
+    if (titleError) {
+      setTitleError('');
+    }
+  };
+
+  const handleUserChange = (
+    changeEvent: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedUserId(changeEvent.target.value);
+    if (userError) {
+      setUserError('');
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} data-cy="addTodoForm">
       <div className="field">
@@ -55,12 +73,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({
           type="text"
           data-cy="titleInput"
           value={title}
-          onChange={e => {
-            setTitle(e.target.value);
-            if (titleError) {
-              setTitleError('');
-            }
-          }}
+          onChange={handleTitleChange}
           placeholder="O que precisa ser feito?"
           aria-describedby={titleError ? 'title-error' : undefined}
         />
@@ -77,12 +90,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({
           id="user-select"
           data-cy="userSelect"
           value={selectedUserId}
-          onChange={e => {
-            setSelectedUserId(e.target.value);
-            if (userError) {
-              setUserError('');
-            }
-          }}
+          onChange={handleUserChange}
           aria-describedby={userError ? 'user-error' : undefined}
         >
           <option value="">Choose a user</option>

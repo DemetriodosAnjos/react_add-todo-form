@@ -15,15 +15,15 @@ export const App: React.FC = () => {
   const todosWithUsers = useMemo(() => {
     return todos.map(todo => ({
       ...todo,
-      user: users.find(user => user.id === todo.userId),
+      user: users.find(foundUser => foundUser.id === todo.userId),
     }));
   }, [todos, users]);
 
   const addTodo = (newTodo: { title: string; userId: number }) => {
     const maxId = Math.max(...todos.map(todo => todo.id), 0);
-    const user = users.find(u => u.id === newTodo.userId);
+    const foundUser = users.find(foundUser => foundUser.id === newTodo.userId);
 
-    if (!user) {
+    if (!foundUser) {
       return;
     }
 
@@ -32,10 +32,10 @@ export const App: React.FC = () => {
       title: newTodo.title,
       userId: newTodo.userId,
       completed: false,
-      user,
+      user: foundUser,
     };
 
-    setTodos(current => [...current, todoToAdd]);
+    setTodos(currentTodos => [...currentTodos, todoToAdd]);
   };
 
   return (
