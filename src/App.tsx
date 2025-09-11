@@ -15,7 +15,7 @@ export const App: React.FC = () => {
   const todosWithUsers = useMemo(() => {
     return todos.map(todo => ({
       ...todo,
-      user: users.find(foundUser => foundUser.id === todo.userId),
+      user: users.find(user => user.id === todo.userId),
     }));
   }, [todos, users]);
 

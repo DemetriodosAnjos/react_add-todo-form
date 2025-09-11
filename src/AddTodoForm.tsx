@@ -51,6 +51,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({
   ) => {
     const value = changeEvent.target.value;
     const validValue = value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+
     setTitle(validValue);
     if (titleError) {
       setTitleError('');
